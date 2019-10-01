@@ -1,6 +1,6 @@
 //VARIAVEIS
   int relayPIN = 8;
-  int ldrPIN = 7;
+  int ldrPIN = 1;
   int ldrValue = 0;
   int Treshold = 500;
   
@@ -11,7 +11,7 @@ void setup() {
 }
 
 void loop() {
-  ldrValue = analog.Read(ldrPIN); //(0-1023)
+  ldrValue = analogRead(ldrPIN); //(0-1023)
 
   if (ldrValue >= Treshold){
     digitalWrite(relayPIN, HIGH);
