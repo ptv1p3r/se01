@@ -1,30 +1,24 @@
-void setup() {
-  // put your setup code here, to run once:
-  // O Relay e para ser ligado no "NO" para que se ele nao tiver energia ou sinal se mantenha desligado
-
-  //CONTROLO DE PINOS
-  pinMode(7, OUTPUT); //Conectar o fio "S" do relay na porta 7
-
-  //VARIAVEIS
-  int relayControl = 0; //Variavel para o controlo do relay
+//VARIAVEIS
+  int relayPIN = 8;
+  int ldrPIN = 7;
+  int ldrValue = 0;
+  int Treshold = 500;
   
+void setup() {
+  pinMode(ldrPIN, OUTPUT); // LDR PIN
+  pinMode(relayPIN, OUTPUT); // RELAY PIN
+  Serial.begin(9600);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  ldrValue = analog.Read(ldrPIN); //(0-1023)
 
-  //Se a variavel conter o valor 0 o relay abre o circuito
-  if (relayControl == 0) {
-    digitalWrite(7, LOW); //Desliga o relay
+  if (ldrValue >= Treshold){
+    digitalWrite(relayPIN, HIGH);
+  } else {
+    digitalWrite(relayPIN, LOW);
   }
 
-  //Se a variavel conter o valor 1 o relay fecha o circuito
-  if (relayControl == 1) {
-    digitalWrite(7, HIGH); //Liga o relay
-  }
-
+  Serial.println(ldrValue);
+  delay(100);
 }
-
-
-//NOTAS
-//30-09-2019 Fiz o condigo que pediste mas ainda nao testei, vou testar amanha quando sair do trabalho
